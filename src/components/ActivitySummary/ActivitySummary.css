@@ -1,0 +1,15 @@
+/* ActivitySummary.css */
+.activity-summary {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.activity-summary h3 {
+  margin-bottom: 10px;
+}
+
+.activity-summary div p {
+  margin: 5px 0;
+}

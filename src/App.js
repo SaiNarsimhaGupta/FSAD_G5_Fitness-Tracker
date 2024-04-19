@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import LoginPage from './components/LoginPage/LoginPage';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -8,7 +10,7 @@ function App() {
         <p>
         FITNESS TRACKER WEB APPLICATION
         </p>
-        
+      <LoginPage/>
       </header>
     </div>
   );
