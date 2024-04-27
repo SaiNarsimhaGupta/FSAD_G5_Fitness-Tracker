@@ -1,0 +1,116 @@
+/* WorkoutsPage.css */
+.workouts-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .workout-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .workout-list li {
+    margin-bottom: 10px;
+  }
+  
+  .workout-list button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; /* Include padding in button width */
+  }
+  
+  .workout-list button:hover {
+    background-color: #0056b3;
+  }
+  
+  .workout-detail {
+    margin-top: 20px;
+  }
+  
+  .workout-detail h3 {
+    margin-bottom: 10px;
+  }
+  
+  .exercise-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .exercise-list li {
+    margin-bottom: 5px;
+  }
+  
+  .exercise-list button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  
+  .exercise-list button:hover {
+    background-color: #218838;
+  }
+  
+  .custom-workout {
+    margin-top: 20px;
+  }
+  
+  .custom-workout h2 {
+    margin-bottom: 10px;
+  }
+  
+  .custom-exercise-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .custom-exercise-list li {
+    margin-bottom: 5px;
+  }
+  
+  .custom-exercise-list button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  
+  .custom-exercise-list button:hover {
+    background-color: #c82333;
+  }
+
+/* Add this to your CSS file */
+.add-button,
+.remove-button {
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border: none;
+  background-color: #f0f0f0;
+  width: 10%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.custom-exercise-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.custom-exercise-list li button {
+    margin-left: auto; /* Push the button to the right */
+  }

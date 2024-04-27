@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // Import CSS for styling
 import Dashboard from '../Dashboard/Dashboard';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error,setError]= useState('');
   const [showRegistration, setShowRegistration] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -32,7 +35,7 @@ const LoginPage = () => {
     if (username === 'admin' && password === 'password') {
       // Successful login
       console.log('Login successful');
-      setError('');
+       navigate('/dashboard');
       // Redirect to dashboard or home page
     } else {
       // Failed login
@@ -50,10 +53,14 @@ const LoginPage = () => {
 
   return (
     <>
-    {!error&&<div className="login-container">
+    <header className="App-header">
+    <p>
+        FITNESS TRACKER WEB APPLICATION
+        </p>
+    <div className="login-container">
       <div className="login-box">
         <h2>Login</h2>
-        {/* {error && <p className="error-message">{error}</p>} */}
+        {error && <p className="error-message">{error}</p>}
         {showRegistration ? (
           <form onSubmit={handleRegistrationSubmit}>
             <div className="input-group">
@@ -103,9 +110,9 @@ const LoginPage = () => {
           {showRegistration ? 'Back to Login' : 'Register'}
         </p>
       </div>
-    </div>}
-    {error && <Dashboard/>}
+    </div>
 
+    </header>
     </>
   );
 };

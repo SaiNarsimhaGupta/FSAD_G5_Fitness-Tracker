@@ -28,4 +28,27 @@
     font-size: 14px;
     color: #666;
   }
-  
+
+  /* ActivityCard.css */
+.activity-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px; /* Add spacing between icons */
+}
+
+.social-icons > svg {
+  cursor: pointer;
+}
+
+.social-icons > svg:focus {
+  outline: 2px solid blue; /* Add focus outline for accessibility */
+}

@@ -1,11 +1,13 @@
 // Dashboard.jsx
-import React from 'react';
+import React,{useState} from 'react';
 import ActivityCard from '../ActivityCard/ActivityCard';
 import ActivityChart from '../ActivityChart/ActivityChart';
 import ActivitySummary from '../ActivitySummary/ActivitySummary'; // Import the ActivitySummary component
 import { faRunning, faBicycle, faWalking, faSwimmer } from '@fortawesome/free-solid-svg-icons'; // Import additional icons
 import './Dashboard.css'; // Import CSS for styling
-
+import ActivityLog from '../ActivityLog';
+import ActivityLogForm from '../ActivityLogForm';
+import Modal from '../Modal/Modal';
 const Dashboard = () => {
   // Sample data for activity summary
   const totalDistance = 35; // in kilometers
@@ -34,22 +36,43 @@ const Dashboard = () => {
     { name: 'Day 7', running: 120, walking: 135, swimming: 105, cycling: 60 },
   ];
 
+  const summary=[
+    {icon:faRunning,title:'Running', value:"6 km"},
+    {icon:faBicycle,title:'Cycling', value:"8 km"},
+    {icon:faWalking,title:'Walking', value:"3 km"},
+    {icon:faSwimmer,title:'Swimming', value:"1 km"}
 
+  ]
+  const [showModal, setShowModal] = useState(false);
+  const [loggedActivities, setLoggedActivities] = useState([]);
+
+  const handleLogActivity = (newActivity) => {
+    setLoggedActivities([...loggedActivities, newActivity]);
+    setShowModal(false); // Close the modal after logging the activity
+  };
   return (
     <div className="dashboard">
       <h2>Activity Dashboard</h2>
       <div className="activity-cards">
-        <ActivityCard icon={faRunning} title="Running" value="5 km" />
-        <ActivityCard icon={faBicycle} title="Cycling" value="3 km" />
-        <ActivityCard icon={faWalking} title="Walking" value="8 km" />
-        <ActivityCard icon={faSwimmer} title="Swimming" value="1 km" /> {/* Add Swimming activity card */}
-        {/* Add more ActivityCard components for additional activities */}
+      {/* if set to 5km, popup will show */}
+      {summary.map((item)=>
+        <ActivityCard icon={item.icon} title={item.title} value={item.value} /> 
+      )}
+        
       </div>
+      <button onClick={() => setShowModal(true)} style={{ width: 'fit-content', marginTop: '50px',marginLeft: '350px',alignContent:'center'}}>Log Activity</button>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <ActivityLogForm onLogActivity={handleLogActivity} />
+        </Modal>
+      )}
+      <ActivityLog activities={loggedActivities} />
       <ActivitySummary
         totalDistance={totalDistance}
         totalCalories={totalCalories}
         averagePace={averagePace}
       />
+      <h2>Graph for the past 7 days</h2>
       <ActivityChart stepsData={stepsData} activityData={activityData} />
     </div>
   );
