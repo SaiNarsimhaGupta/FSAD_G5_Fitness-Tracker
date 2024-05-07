@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './NavBar.css'; // Import your CSS file for styling
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('Dashboard');
 
   const handleClick = (tabName) => {
-    setActiveTab(tabName);
+    setActiveTab(tabName === activeTab ? '' : tabName);
   };
 
   const handleLogout = () => {
@@ -27,37 +28,37 @@ const NavBar = () => {
 
       <Link
         to="/dashboard"
-        className={activeTab === 'Dashboard' ? 'active' : ''}
         onClick={() => handleClick('Dashboard')}
+        className={location.pathname === '/dashboard' ? 'active' : ''}
       >
         Dashboard
       </Link>
 
       <Link
         to="/nutrition"
-        className={activeTab === 'Nutrition' ? 'active' : ''}
         onClick={() => handleClick('Nutrition')}
+        className={location.pathname === '/nutrition' ? 'active' : ''}
       >
         Nutrition Tracking
       </Link>
 
       <Link
         to="/goals"
-        className={activeTab === 'Goals' ? 'active' : ''}
         onClick={() => handleClick('Goals')}
+        className={location.pathname === '/goals' ? 'active' : ''}
       >
         Goal Setting
       </Link>
 
       <Link
         to="/workouts"
-        className={activeTab === 'Workouts' ? 'active' : ''}
         onClick={() => handleClick('Workouts')}
+        className={location.pathname === '/workouts' ? 'active' : ''}
       >
         Workouts
       </Link>
 
-      <button style={{width:'60px'}}onClick={handleLogout}>Logout</button>
+      <button style={{ width: '60px' }} onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -36,7 +36,11 @@ const NutritionTracking = () => {
     }
   };
 
- 
+  const handleRemoveFood = (index) => {
+    const updatedFoods = [...loggedFoods];
+    updatedFoods.splice(index, 1);
+    setLoggedFoods(updatedFoods);
+  };
 
   return (
     <>
@@ -92,6 +96,7 @@ const NutritionTracking = () => {
               <p style={{fontWeight:'bold'}}>Carbs: {item.food.carbs}</p>
               <p style={{fontWeight:'bold'}}>Fat: {item.food.fat}</p>
               <p style={{fontWeight:'bold'}}>Protein: {item.food.protein}</p>
+              <button style={{width:'60px'}}onClick={() => handleRemoveFood(index)} className="remove-button">Remove</button>
             </div>
           ))}
         </div>

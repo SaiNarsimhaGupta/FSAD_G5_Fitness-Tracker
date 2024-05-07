@@ -1,14 +1,17 @@
 // Dashboard.jsx
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import ActivityCard from '../ActivityCard/ActivityCard';
 import ActivityChart from '../ActivityChart/ActivityChart';
 import ActivitySummary from '../ActivitySummary/ActivitySummary'; // Import the ActivitySummary component
-import { faRunning, faBicycle, faWalking, faSwimmer } from '@fortawesome/free-solid-svg-icons'; // Import additional icons
+import { faRunning, faBicycle, faWalking, faSwimmer,faCheck } from '@fortawesome/free-solid-svg-icons'; // Import additional icons
 import './Dashboard.css'; // Import CSS for styling
 import ActivityLog from '../ActivityLog';
 import ActivityLogForm from '../ActivityLogForm';
 import Modal from '../Modal/Modal';
 import NavBar from '../NavBar/NavBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+
 const Dashboard = () => {
   // Sample data for activity summary
   const totalDistance = 35; // in kilometers
@@ -25,7 +28,16 @@ const heartRate=110
     { name: 'Day 6', steps: 10000 },
     { name: 'Day 7', steps: 11000 },
   ];
+  const [data,setData]=useState([])
+useEffect(()=>{
+  setData([
+    {icon:faRunning,title:'Running', value:"6 km"},
+    {icon:faBicycle,title:'Cycling', value:"8 km"},
+    {icon:faWalking,title:'Walking', value:"3 km"},
+    {icon:faSwimmer,title:'Swimming', value:"1 km"}
 
+  ])
+},[])
   // Mock data for activities like running, walking, swimming, cycling
   const activityData = [
     { name: 'Day 1', running: 30, walking: 45, swimming: 15, cycling: 60 },
@@ -46,6 +58,17 @@ const heartRate=110
   ]
   const [showModal, setShowModal] = useState(false);
   const [loggedActivities, setLoggedActivities] = useState([]);
+const [paired,setPaired]=useState(false)
+
+const handle=()=>{
+  setData([
+    {icon:faRunning,title:'Running', value:"5 km"},
+    {icon:faBicycle,title:'Cycling', value:"8 km"},
+    {icon:faWalking,title:'Walking', value:"3 km"},
+    {icon:faSwimmer,title:'Swimming', value:"1 km"}
+  ])
+  setPaired(true)
+}
 
   const handleLogActivity = (newActivity) => {
     setLoggedActivities([...loggedActivities, newActivity]);
@@ -58,7 +81,7 @@ const heartRate=110
         <div className="activity-cards">
           {/* Activity cards and log activity section */}
           <h2>Progress</h2>
-          {summary.map((item) => (
+          {data.map((item) => (
             <ActivityCard icon={item.icon} title={item.title} value={item.value} />
           ))}
           <div className='activity-log'>
@@ -78,7 +101,14 @@ const heartRate=110
         <div className="activity-charts">
           {/* Graphs */}
           <ActivityChart stepsData={stepsData} activityData={activityData} />
-          integrate with smart watch
+        {paired?
+        <div style={{display:'flex'}}>
+         <div className="icon-tick">
+        <FontAwesomeIcon icon={faCheck} />
+      </div>
+         <h3>Paired</h3>
+         </div>:<button onClick={handle}> Integrate with smart watch</button>} 
+        
         </div>
         <div className="activity-summary">
           {/* Activity summary */}

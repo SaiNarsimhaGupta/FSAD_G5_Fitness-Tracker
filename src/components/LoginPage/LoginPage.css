@@ -2,15 +2,15 @@ body.login-page {
   margin: 0;
   font-family: Arial, sans-serif;
   /* background-color: #f8f9fa; */
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9c1oMwSmXQ3HHSPWrB9zqRyzlrIy4VoWkOw&s');
+  /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9c1oMwSmXQ3HHSPWrB9zqRyzlrIy4VoWkOw&s');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-position: center;
+  background-position: center; */
 }
 
 header {
-  background-color: #343a40;
+  background-color: #3A98B9;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -24,7 +24,7 @@ header {
 }
 
 .login-box {
-  background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+  background-color: white; /* Black with 50% opacity */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the opacity here */
@@ -35,7 +35,7 @@ header {
 .login-box h2 {
   margin-bottom: 20px;
   text-align: center;
-  color: #fff;
+  color: #0E46A3;
 }
 
 .input-group {
@@ -45,13 +45,13 @@ header {
 .input-group label {
   display: block;
   margin-bottom: 5px;
-  color: #fff;
+  color: #0E46A3;
 }
 
 .input-group input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 3px;
   border: 1px solid #ccc;
 }
 

@@ -6,17 +6,13 @@
   margin: 0 auto;
   padding: 20px;
 }
-/* .dashboard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: inherit;
-  filter: blur(30px); /* Adjust blur amount as needed */
-   
-
+.icon-tick{
+  vertical-align: middle;
+    padding: 10px;
+    align-content: center;
+    color: green;
+    font-weight: 'bold'
+}
 .activity-cards {
   grid-column: 1;
 }
