@@ -28,13 +28,14 @@ const ActivityLogForm = ({ onLogActivity }) => {
   return (
     <div>
       <h2>Log Activity</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{width: '300px'}}>
         <input
           type="text"
           value={activityType}
           onChange={(e) => setActivityType(e.target.value)}
           placeholder="Activity Type"
           required
+          style={{margin:'5px'}}
         />
         <input
           type="text"
@@ -42,19 +43,15 @@ const ActivityLogForm = ({ onLogActivity }) => {
           onChange={(e) => setDuration(e.target.value)}
           placeholder="Duration"
           required
+          style={{margin:'5px'}}
+          
         />
         <input
           type="text"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}
           placeholder="Distance"
-          required
-        />
-        <input
-          type="text"
-          value={intensity}
-          onChange={(e) => setIntensity(e.target.value)}
-          placeholder="Intensity"
+          style={{margin:'5px'}}
           required
         />
         <input
@@ -62,9 +59,10 @@ const ActivityLogForm = ({ onLogActivity }) => {
           value={caloriesBurned}
           onChange={(e) => setCaloriesBurned(e.target.value)}
           placeholder="Calories Burned"
+          style={{margin:'5px'}}
           required
         />
-        <button type="submit">Log Activity</button>
+        <button type="submit" style={{margin:'5px'}} >Log Activity</button>
       </form>
     </div>
   );

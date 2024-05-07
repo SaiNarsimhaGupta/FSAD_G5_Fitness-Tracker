@@ -47,7 +47,7 @@ const ActivityCard = ({ icon, title, value }) => {
   };
 console.log('hello')
   return (
-    <div className="activity-card">
+    <div className="activity-card-summary">
       <div className="icon">
         <FontAwesomeIcon icon={icon} />
       </div>
@@ -58,6 +58,8 @@ console.log('hello')
           <Modal onClose={handlePopupClose}>
             <h2>Congratulations!</h2>
             <p>You've reached your Milestone!</p>
+            <h6 style={{    margin: '10px 1rem',textAlign:'center'}}>Share your progress</h6>
+
             <div className="social-icons">
               <FontAwesomeIcon
                 icon={faFacebook}

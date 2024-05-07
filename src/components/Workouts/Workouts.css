@@ -1,6 +1,6 @@
 /* WorkoutsPage.css */
 .workouts-page {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -56,6 +56,9 @@
     cursor: pointer;
     border-radius: 3px;
     font-size: 14px;
+    margin: 10px;
+    width: 50px;
+
   }
   
   .exercise-list button:hover {
@@ -80,6 +83,8 @@
   }
   
   .custom-exercise-list button {
+    margin: 10px;
+    width: 50px;
     background-color: #dc3545;
     color: white;
     border: none;
@@ -105,7 +110,13 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
+.workout-container{
+  /* background-color: #EEEEEE; */
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/006/523/420/small_2x/blur-background-light-blur-blue-background-photo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+}
 .custom-exercise-list li {
   display: flex;
   align-items: center;

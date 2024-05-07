@@ -8,12 +8,13 @@ import './Dashboard.css'; // Import CSS for styling
 import ActivityLog from '../ActivityLog';
 import ActivityLogForm from '../ActivityLogForm';
 import Modal from '../Modal/Modal';
+import NavBar from '../NavBar/NavBar';
 const Dashboard = () => {
   // Sample data for activity summary
   const totalDistance = 35; // in kilometers
   const totalCalories = 1200; // in kcal
   const averagePace = 5.5; // in minutes per kilometer
-
+const heartRate=110
   // Sample data for line chart and bar chart
   const stepsData = [
     { name: 'Day 1', steps: 5000 },
@@ -51,30 +52,41 @@ const Dashboard = () => {
     setShowModal(false); // Close the modal after logging the activity
   };
   return (
-    <div className="dashboard">
-      <h2>Activity Dashboard</h2>
-      <div className="activity-cards">
-      {/* if set to 5km, popup will show */}
-      {summary.map((item)=>
-        <ActivityCard icon={item.icon} title={item.title} value={item.value} /> 
-      )}
+    <>
+      <NavBar />
+      <div className="dashboard">
+        <div className="activity-cards">
+          {/* Activity cards and log activity section */}
+          <h2>Progress</h2>
+          {summary.map((item) => (
+            <ActivityCard icon={item.icon} title={item.title} value={item.value} />
+          ))}
+          <div className='activity-log'>
+      <h2>Activity Log</h2>
+
+          <button className='activityButton' onClick={() => setShowModal(true)} style={{ width: 'fit-content', marginTop: '20px' }}>
+            Log Activity
+          </button>
+        <ActivityLog activities={loggedActivities} />
+        </div>
+        </div>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <ActivityLogForm onLogActivity={handleLogActivity} />
+          </Modal>
+        )}
+        <div className="activity-charts">
+          {/* Graphs */}
+          <ActivityChart stepsData={stepsData} activityData={activityData} />
+          integrate with smart watch
+        </div>
+        <div className="activity-summary">
+          {/* Activity summary */}
+          <ActivitySummary totalDistance={totalDistance} totalCalories={totalCalories} averagePace={averagePace} heartRate={heartRate}/>
+        </div>
         
       </div>
-      <button onClick={() => setShowModal(true)} style={{ width: 'fit-content', marginTop: '50px',marginLeft: '350px',alignContent:'center'}}>Log Activity</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <ActivityLogForm onLogActivity={handleLogActivity} />
-        </Modal>
-      )}
-      <ActivityLog activities={loggedActivities} />
-      <ActivitySummary
-        totalDistance={totalDistance}
-        totalCalories={totalCalories}
-        averagePace={averagePace}
-      />
-      <h2>Graph for the past 7 days</h2>
-      <ActivityChart stepsData={stepsData} activityData={activityData} />
-    </div>
+    </>
   );
 };
 

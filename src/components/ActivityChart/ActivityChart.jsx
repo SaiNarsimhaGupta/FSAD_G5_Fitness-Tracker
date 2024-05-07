@@ -2,11 +2,11 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from 'recharts';
 
-const BarGraph = ({ data }) => {
+export const BarGraph = ({ data }) => {
   return (
     <div style={{ marginBottom: '30px' }}>
-      <h2>Step Tracker</h2>
-      <BarChart width={400} height={300} data={data}>
+      <h2>Steps Tracker</h2>
+      <BarChart width={500} height={400} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -19,7 +19,7 @@ const BarGraph = ({ data }) => {
   );
 };
 
-const ActivityGraph = ({ data }) => {
+export const ActivityGraph = ({ data }) => {
   return (
     <div style={{ marginBottom: '30px' }}>
       <h2>Activity Tracker</h2>
@@ -42,7 +42,7 @@ const Graphs = ({ stepsData, activityData }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start' }}>
       <BarGraph data={stepsData} />
-      <ActivityGraph data={activityData} />
+      {/* <ActivityGraph data={activityData} /> */}
     </div>
   );
 };

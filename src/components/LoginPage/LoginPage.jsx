@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './LoginPage.css'; // Import CSS for styling
 import Dashboard from '../Dashboard/Dashboard';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,14 @@ const LoginPage = () => {
   const [showRegistration, setShowRegistration] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
+
+  useEffect(() => {
+    document.body.classList.add('login-page');
+
+    return () => {
+      document.body.classList.remove('login-page');
+    };
+  }, []);
 
   const navigate = useNavigate();
 
@@ -53,66 +61,63 @@ const LoginPage = () => {
 
   return (
     <>
-    <header className="App-header">
-    <p>
-        FITNESS TRACKER WEB APPLICATION
-        </p>
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Login</h2>
-        {error && <p className="error-message">{error}</p>}
-        {showRegistration ? (
-          <form onSubmit={handleRegistrationSubmit}>
-            <div className="input-group">
-              <label htmlFor="new-username">New Username:</label>
-              <input
-                type="text"
-                id="new-username"
-                value={newUsername}
-                onChange={handleNewUsernameChange}
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="new-password">New Password:</label>
-              <input
-                type="password"
-                id="new-password"
-                value={newPassword}
-                onChange={handleNewPasswordChange}
-              />
-            </div>
-            <button type="submit">Register</button>
-          </form>
-        ) : (
-          <form onSubmit={handleLoginSubmit}>
-            <div className="input-group">
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={handleUsernameChange}
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-            </div>
-            <button type="submit">Login</button>
-          </form>
-        )}
-        <p className="register-link" onClick={() => setShowRegistration(!showRegistration)}>
-          {showRegistration ? 'Back to Login' : 'Register'}
-        </p>
-      </div>
-    </div>
-
-    </header>
+    <header>
+  <h1>FITNESS TRACKER WEB APPLICATION</h1>
+</header>
+<div className="login-container">
+  <div className="login-box">
+    <h2>Login</h2>
+    {error && <p className="error-message">{error}</p>}
+    {showRegistration ? (
+      <form onSubmit={handleRegistrationSubmit}>
+        <div className="input-group">
+          <label htmlFor="new-username">New Username:</label>
+          <input
+            type="text"
+            id="new-username"
+            value={newUsername}
+            onChange={handleNewUsernameChange}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="new-password">New Password:</label>
+          <input
+            type="password"
+            id="new-password"
+            value={newPassword}
+            onChange={handleNewPasswordChange}
+          />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    ) : (
+      <form onSubmit={handleLoginSubmit}>
+        <div className="input-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    )}
+    <p className="register-link" onClick={() => setShowRegistration(!showRegistration)}>
+      {showRegistration ? 'Back to Login' : 'Register'}
+    </p>
+  </div>
+</div>
     </>
   );
 };

@@ -1,15 +1,88 @@
 /* ActivitySummary.css */
+:root {
+  --running-color: #ED9455;
+  --calories-color: #BEADFA;
+  --pace-color: #5AB2FF;
+  --heart-rate-color: #FFB1B1;
+}
+
 .activity-summary {
-  background-color: #f9f9f9;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.activity-summary h2 {
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column; /* Display cards in a column */
+  gap: 20px; /* Add some spacing between cards */
+}
+
+.card {
+  position: relative; /* Required for the pseudo-element */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  padding: 10px;
   border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
-.activity-summary h3 {
-  margin-bottom: 10px;
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px; /* Height of the design element */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Gradient for fading effect */
 }
 
-.activity-summary div p {
-  margin: 5px 0;
+.card:hover {
+  background-color: #f9f9f9;
+}
+
+.card-icon {
+  font-size: 24px;
+  margin-right: 10px; /* Add some spacing between icon and text */
+}
+
+.running {
+  background-color: var(--running-color); /* Orange color for running */
+  color: white;
+}
+
+.calories {
+  background-color: var(--calories-color); /* Yellow color for calories */
+  color: white;
+}
+
+.pace {
+  background-color: var(--pace-color); /* Blue color for pace */
+  color: white;
+}
+
+.heart-rate {
+  background-color: var(--heart-rate-color); /* Green color for heart rate */
+  color: white;
+}
+
+/* Adjust the background color on hover */
+.running:hover {
+  background-color: #FFBB70; /* Lighter orange */
+}
+
+.calories:hover {
+  background-color: #DFCCFB; /* Lighter yellow */
+}
+
+.pace:hover {
+  background-color: #A0DEFF; /* Lighter blue */
+}
+
+.heart-rate:hover {
+  background-color: #FFCBCB; /* Lighter green */
 }

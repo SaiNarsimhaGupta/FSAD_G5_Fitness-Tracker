@@ -11,7 +11,6 @@ import GoalSetting from './components/GoalSetting/GoalSetting';
 function App() {
   return (
     <Router>
-      <Layout/>
       <Routes>
       <Route path="nutrition" element={<NutritionTracking />} />
             <Route path="goals" element={<GoalSetting />} />

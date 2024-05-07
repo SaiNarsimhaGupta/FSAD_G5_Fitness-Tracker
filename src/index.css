@@ -1,4 +1,7 @@
 body {
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/006/523/420/small_2x/blur-background-light-blur-blue-background-photo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

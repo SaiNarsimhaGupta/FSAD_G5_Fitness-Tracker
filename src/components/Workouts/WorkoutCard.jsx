@@ -5,14 +5,14 @@ import { faDumbbell, faRunning, faWalking, faSwimmer, faTree } from '@fortawesom
 
 const getIconForWorkout = (workoutName) => {
   switch (workoutName.toLowerCase()) {
-    case 'full body workout':
+    case 'full workout':
       return faDumbbell;
     case 'cardio blast':
       return faRunning;
     case 'leg day':
       return faWalking;
-    case 'core strengthening':
-      return faTree;
+    case 'core strengthen':
+      return faDumbbell;
     case 'yoga':
       return faSwimmer;
     default:
@@ -27,10 +27,12 @@ const WorkoutCard = ({ workout, onSelectWorkout, isSelected }) => {
     <div
       className={`workout-card ${isSelected ? 'selected' : ''}`}
       onClick={() => onSelectWorkout(workout)}
-      style={{ display: 'inline-block', margin: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', cursor: 'pointer' }}
+      style={{ backgroundColor:'white',width:'170px',height: '130px',display: 'inline-block', margin: '10px', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
     >
+      <div style={{color: '#3A98B9'}}>
       {icon && <FontAwesomeIcon icon={icon} size="3x" />}
-      <h3>{workout.name}</h3>
+      </div>
+      <h3 style={{color: '#0E46A3'}}>{workout.name}</h3>
     </div>
   );
 };

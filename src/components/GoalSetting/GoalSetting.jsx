@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import GoalCard from '../GoalCard/GoalCard';
 import './GoalSetting.css'; // Import CSS for styling
+import NavBar from '../NavBar/NavBar';
 
 const GoalSetting = () => {
   const [goal, setGoal] = useState('');
@@ -22,8 +23,12 @@ const GoalSetting = () => {
   };
 
   return (
+    <><NavBar/>
+    <div className="goal-setting-container">
+
     <div className="goal-setting">
-      <h2>Set Fitness Goals</h2>
+      
+      <h2 style={{textAlign:'center'}}>Set Fitness Goals</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="goal">Goal:</label>
@@ -72,6 +77,9 @@ const GoalSetting = () => {
         ))}
       </div>
     </div>
+    </div>
+
+    </>
   );
 };
 
