@@ -33,7 +33,7 @@ public class ActivityService {
             // Creating new activity
             activity = new Activity();
             activity.setActivityid(uuid.generateShortUUID());
-//        activity.setUserid("user1"); //todo: need to use user logged in currently
+//        activity.setUserid(logActivityDto.getUserid());
             activity.setName(logActivityDto.getActivityName());
         }
         activity.setCurrentduration(logActivityDto.getCurrentduration());
@@ -48,7 +48,7 @@ public class ActivityService {
     public Nutrition logNutrition(NutritionDto nutritionDto) {
         Nutrition nutrition = new Nutrition();
         nutrition.setNutritionid(uuid.generateShortUUID());
-//        nutrition.setUserid("user1"); //todo: need to use user logged in currently
+//        nutrition.setUserid(nutritionDto.getUserid());
         nutrition.setFoodname(nutritionDto.getFoodname());
         nutrition.setMealtype(nutritionDto.getMealtype());
         nutrition.setMacronutrienttype(nutritionDto.getMacronutrienttype());
@@ -57,13 +57,11 @@ public class ActivityService {
         return nutritionRepository.save(nutrition);
     }
 
-    public List<Activity> getActivitiesForUser() {
-        String user = "user1"; // get currently logged in user
-        return (activityRepository.findAllByUserid(user));
+    public List<Activity> getActivitiesForUser(String userid) {
+        return (activityRepository.findAllByUserid(userid));
     }
 
-    public List<Nutrition> getNutritionLogsOfUser() {
-        String user = "user1";
-        return (nutritionRepository.findAllByUserid(user));
+    public List<Nutrition> getNutritionLogsOfUser(String userid) {
+        return (nutritionRepository.findAllByUserid(userid));
     }
 }

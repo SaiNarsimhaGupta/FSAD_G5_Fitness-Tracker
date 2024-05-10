@@ -42,10 +42,10 @@ public class ActivityController {
     }
 
     @GetMapping(value = "/getActivitiesForUser", produces = {"application/json"})
-    public ResponseEntity<List<Activity>> getActivitiesForUser() {
+    public ResponseEntity<List<Activity>> getActivitiesForUser(@RequestParam String userid) {
         List<Activity> activities = new ArrayList<>();
         try {
-            activities = activityService.getActivitiesForUser();
+            activities = activityService.getActivitiesForUser(userid);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,10 +53,10 @@ public class ActivityController {
     }
 
     @GetMapping(value = "/getNutritionLogsOfUser", produces = {"application/json"})
-    public ResponseEntity<List<Nutrition>> getNutritionLogsOfUser() {
+    public ResponseEntity<List<Nutrition>> getNutritionLogsOfUser(@RequestParam String userid) {
         List<Nutrition> nutritionList = new ArrayList<>();
         try {
-            nutritionList = activityService.getNutritionLogsOfUser();
+            nutritionList = activityService.getNutritionLogsOfUser(userid);
         } catch (Exception e) {
             e.printStackTrace();
         }

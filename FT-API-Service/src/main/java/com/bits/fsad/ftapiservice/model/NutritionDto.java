@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class NutritionDto {
+    private String userid;
     private String foodname;
     private String mealtype;
     private String macronutrienttype;

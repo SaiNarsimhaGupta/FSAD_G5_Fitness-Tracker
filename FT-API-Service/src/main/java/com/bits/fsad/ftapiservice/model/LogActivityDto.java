@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class LogActivityDto {
+    private String userid;
     private String activityId;
     private String activityName;
     private Integer currentduration;
