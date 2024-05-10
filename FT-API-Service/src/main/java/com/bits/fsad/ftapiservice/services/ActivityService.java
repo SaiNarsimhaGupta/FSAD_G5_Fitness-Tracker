@@ -10,7 +10,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@SuppressWarnings("unused")
 public class ActivityService {
 
     @Autowired
@@ -52,5 +55,15 @@ public class ActivityService {
         nutrition.setCalorieintake(nutritionDto.getCalorieintake());
         nutrition.setCaloriegoal(nutritionDto.getCaloriegoal());
         return nutritionRepository.save(nutrition);
+    }
+
+    public List<Activity> getActivitiesForUser() {
+        String user = "user1"; // get currently logged in user
+        return (activityRepository.findAllByUserid(user));
+    }
+
+    public List<Nutrition> getNutritionLogsOfUser() {
+        String user = "user1";
+        return (nutritionRepository.findAllByUserid(user));
     }
 }

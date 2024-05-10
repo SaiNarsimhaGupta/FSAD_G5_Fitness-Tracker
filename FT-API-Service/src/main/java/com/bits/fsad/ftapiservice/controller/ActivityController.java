@@ -7,10 +7,10 @@ import com.bits.fsad.ftapiservice.model.NutritionDto;
 import com.bits.fsad.ftapiservice.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @SuppressWarnings("unused")
@@ -41,4 +41,25 @@ public class ActivityController {
         return ResponseEntity.ok(savedNutrition);
     }
 
+    @GetMapping(value = "/getActivitiesForUser", produces = {"application/json"})
+    public ResponseEntity<List<Activity>> getActivitiesForUser() {
+        List<Activity> activities = new ArrayList<>();
+        try {
+            activities = activityService.getActivitiesForUser();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(activities);
+    }
+
+    @GetMapping(value = "/getNutritionLogsOfUser", produces = {"application/json"})
+    public ResponseEntity<List<Nutrition>> getNutritionLogsOfUser() {
+        List<Nutrition> nutritionList = new ArrayList<>();
+        try {
+            nutritionList = activityService.getNutritionLogsOfUser();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(nutritionList);
+    }
 }
