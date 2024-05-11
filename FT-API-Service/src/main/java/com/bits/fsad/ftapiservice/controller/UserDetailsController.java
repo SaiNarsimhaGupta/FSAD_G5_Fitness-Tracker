@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
@@ -19,10 +20,10 @@ public class UserDetailsController {
     private UserDetailsService userDetailsService;
 
     @GetMapping(value = "/getUserDetails", produces = {"application/json"})
-    public ResponseEntity<Optional<Userdetail>> getUserDetails() {
+    public ResponseEntity<Optional<Userdetail>> getUserDetails(@RequestParam String userid) {
         Optional<Userdetail> user = Optional.of(new Userdetail());
         try {
-            user = userDetailsService.getUserDetails();
+            user = userDetailsService.getUserDetails(userid);
         } catch (Exception e) {
             e.printStackTrace();
         }

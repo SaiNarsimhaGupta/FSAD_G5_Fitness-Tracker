@@ -14,8 +14,7 @@ public class UserDetailsService {
     @Autowired
     private UserDetailsRepository userDetailsRepo;
 
-    public Optional<Userdetail> getUserDetails() {
-        String user = "user1"; // get current logged in user
-        return userDetailsRepo.findById(user);
+    public Optional<Userdetail> getUserDetails(String userid) {
+        return userDetailsRepo.findById(userid);
     }
 }
