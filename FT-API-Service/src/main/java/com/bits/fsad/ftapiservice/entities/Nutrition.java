@@ -15,10 +15,8 @@ public class Nutrition {
     @Column(name = "NUTRITIONID", nullable = false)
     private String nutritionid;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "USERID", nullable = false)
-    private Userdetail userid;
+    @Column(name = "USERID", nullable = false)
+    private String userid;
 
     @Column(name = "FOODNAME")
     private String foodname;

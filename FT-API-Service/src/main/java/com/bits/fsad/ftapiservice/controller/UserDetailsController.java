@@ -1,7 +1,7 @@
 package com.bits.fsad.ftapiservice.controller;
 
 import com.bits.fsad.ftapiservice.entities.Userdetail;
-import com.bits.fsad.ftapiservice.services.UserDetailsService;
+import com.bits.fsad.ftapiservice.services.UserManagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +17,13 @@ import java.util.Optional;
 public class UserDetailsController {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserManagingService userManagingService;
 
     @GetMapping(value = "/getUserDetails", produces = {"application/json"})
     public ResponseEntity<Optional<Userdetail>> getUserDetails(@RequestParam String userid) {
         Optional<Userdetail> user = Optional.of(new Userdetail());
         try {
-            user = userDetailsService.getUserDetails(userid);
+            user = userManagingService.getUserDetails(userid);
         } catch (Exception e) {
             e.printStackTrace();
         }

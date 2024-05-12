@@ -48,7 +48,7 @@ public class ActivityService {
     public Nutrition logNutrition(NutritionDto nutritionDto) {
         Nutrition nutrition = new Nutrition();
         nutrition.setNutritionid(uuid.generateShortUUID());
-//        nutrition.setUserid(nutritionDto.getUserid());
+        nutrition.setUserid(nutritionDto.getUserid());
         nutrition.setFoodname(nutritionDto.getFoodname());
         nutrition.setMealtype(nutritionDto.getMealtype());
         nutrition.setMacronutrienttype(nutritionDto.getMacronutrienttype());
