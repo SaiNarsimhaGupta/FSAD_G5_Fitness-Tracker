@@ -15,10 +15,9 @@ public class Activity {
     @Column(name = "ACTIVITYID", nullable = false)
     private String activityid;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "USERID", nullable = false)
-    private Userdetail userid;
+    private String userid;
 
     @Column(name = "NAME", nullable = false)
     private String name;

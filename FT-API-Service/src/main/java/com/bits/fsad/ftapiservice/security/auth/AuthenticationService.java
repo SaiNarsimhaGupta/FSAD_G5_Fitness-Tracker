@@ -2,11 +2,12 @@ package com.bits.fsad.ftapiservice.security.auth;
 
 
 import com.bits.fsad.ftapiservice.entities.Userdetail;
+import com.bits.fsad.ftapiservice.repository.UserDetailsRepository;
 import com.bits.fsad.ftapiservice.security.config.JwtService;
-import com.bits.fsad.ftapiservice.security.entity.UserRepository;
 import com.bits.fsad.ftapiservice.security.token.Token;
 import com.bits.fsad.ftapiservice.security.token.TokenRepository;
 import com.bits.fsad.ftapiservice.security.token.TokenType;
+import com.bits.fsad.ftapiservice.services.UUIDService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,15 +23,16 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-  private final UserRepository repository;
+  private final UserDetailsRepository repository;
   private final TokenRepository tokenRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final UUIDService uuidService;
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Userdetail.builder()
-        .userid(request.getUserid())
+        .userid(uuidService.generateShortUUID())
         .name(request.getName())
         .emailaddress(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
@@ -41,8 +43,7 @@ public class AuthenticationService {
     var refreshToken = jwtService.generateRefreshToken(user);
     saveUserToken(savedUser, jwtToken);
     return AuthenticationResponse.builder()
-        .accessToken(jwtToken)
-            .refreshToken(refreshToken)
+        .accessToken(jwtToken).refreshToken(refreshToken).userName(savedUser.getName()).userID(savedUser.getUserid())
         .build();
   }
 

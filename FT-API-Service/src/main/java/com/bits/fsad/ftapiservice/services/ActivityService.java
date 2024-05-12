@@ -33,7 +33,7 @@ public class ActivityService {
             // Creating new activity
             activity = new Activity();
             activity.setActivityid(uuid.generateShortUUID());
-//        activity.setUserid(logActivityDto.getUserid());
+            activity.setUserid(logActivityDto.getUserid());
             activity.setName(logActivityDto.getActivityName());
         }
         activity.setCurrentduration(logActivityDto.getCurrentduration());
