@@ -1,12 +1,11 @@
 // ActivityLogForm.jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ActivityLogForm = ({ onLogActivity }) => {
-  const [activityType, setActivityType] = useState('');
-  const [duration, setDuration] = useState('');
-  const [distance, setDistance] = useState('');
-  const [intensity, setIntensity] = useState('');
-  const [caloriesBurned, setCaloriesBurned] = useState('');
+  const [activityType, setActivityType] = useState("");
+  const [duration, setDuration] = useState("");
+  const [distance, setDistance] = useState("");
+  const [caloriesBurned, setCaloriesBurned] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,28 +13,49 @@ const ActivityLogForm = ({ onLogActivity }) => {
       activityType,
       duration,
       distance,
-      intensity,
       caloriesBurned,
     };
     onLogActivity(newActivity);
-    setActivityType('');
-    setDuration('');
-    setDistance('');
-    setIntensity('');
-    setCaloriesBurned('');
+    setActivityType("");
+    setDuration("");
+    setDistance("");
+    setCaloriesBurned("");
+
+    // const postdata = {
+    //   activityName: activityType,
+    //   currentduration: duration,
+    //   currentdistance: distance,
+    //   calories: caloriesBurned,
+    // };
+    //   fetch('http://localhost:8080/ftApiService/logActivityOrGoal?userid=${userId}', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(postdata)
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    //   })
+    //   .catch(error => {
+    //     console.error('There was a problem with your fetch operation:', error);
+    //   });
   };
 
   return (
     <div>
       <h2>Log Activity</h2>
-      <form onSubmit={handleSubmit} style={{width: '300px'}}>
+      <form onSubmit={handleSubmit} style={{ width: "300px" }}>
         <input
           type="text"
           value={activityType}
           onChange={(e) => setActivityType(e.target.value)}
           placeholder="Activity Type"
           required
-          style={{margin:'5px'}}
+          style={{ margin: "5px" }}
         />
         <input
           type="text"
@@ -43,15 +63,14 @@ const ActivityLogForm = ({ onLogActivity }) => {
           onChange={(e) => setDuration(e.target.value)}
           placeholder="Duration"
           required
-          style={{margin:'5px'}}
-          
+          style={{ margin: "5px" }}
         />
         <input
           type="text"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}
           placeholder="Distance"
-          style={{margin:'5px'}}
+          style={{ margin: "5px" }}
           required
         />
         <input
@@ -59,10 +78,12 @@ const ActivityLogForm = ({ onLogActivity }) => {
           value={caloriesBurned}
           onChange={(e) => setCaloriesBurned(e.target.value)}
           placeholder="Calories Burned"
-          style={{margin:'5px'}}
+          style={{ margin: "5px" }}
           required
         />
-        <button type="submit" style={{margin:'5px'}} >Log Activity</button>
+        <button type="submit" style={{ margin: "5px" }}>
+          Log Activity
+        </button>
       </form>
     </div>
   );

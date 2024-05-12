@@ -16,20 +16,33 @@ import ActivityLogForm from "../ActivityLogForm";
 import Modal from "../Modal/Modal";
 import NavBar from "../NavBar/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { helper } from "../../utils/function";
 
 const Dashboard = () => {
-  const summary = [
+  const [summary, setSummary] = useState([
     { icon: faRunning, title: "Running", value: "6 km" },
     { icon: faBicycle, title: "Cycling", value: "8 km" },
     { icon: faWalking, title: "Walking", value: "3 km" },
     { icon: faSwimmer, title: "Swimming", value: "1 km" },
-  ];
+  ]);
 
-  // Sample data for activity summary
-  const totalDistance = 35; // in kilometers
-  const totalCalories = 1200; // in kcal
-  const averagePace = 5.5; // in minutes per kilometer
-  const heartRate = 110;
+  // useEffect(() => {
+  //   fetchSummary("user123");
+  // }, []);
+
+  // const fetchSummary = async (userId) => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8080/ftApiService/getUserDetails?userid=${userId}"
+  //     );
+  //     const data = await response.text();
+  //     const data1= await helper(data.activities)
+  //     setSummary(data1);
+  //   } catch (error) {
+  //     console.error("Error fetching version:", error);
+  //   }
+  // };
+
   // Sample data for line chart and bar chart
   const stepsData = [
     { name: "Day 1", steps: 5000 },
@@ -40,27 +53,15 @@ const Dashboard = () => {
     { name: "Day 6", steps: 10000 },
     { name: "Day 7", steps: 11000 },
   ];
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData(summary);
-  }, []);
-  // Mock data for activities like running, walking, swimming, cycling
-  const activityData = [
-    { name: "Day 1", running: 30, walking: 45, swimming: 15, cycling: 60 },
-    { name: "Day 2", running: 45, walking: 60, swimming: 30, cycling: 45 },
-    { name: "Day 3", running: 60, walking: 75, swimming: 45, cycling: 30 },
-    { name: "Day 4", running: 75, walking: 90, swimming: 60, cycling: 15 },
-    { name: "Day 5", running: 90, walking: 105, swimming: 75, cycling: 30 },
-    { name: "Day 6", running: 105, walking: 120, swimming: 90, cycling: 45 },
-    { name: "Day 7", running: 120, walking: 135, swimming: 105, cycling: 60 },
-  ];
+
+  // Map over the activities and create a new array with the desired format
 
   const [showModal, setShowModal] = useState(false);
   const [loggedActivities, setLoggedActivities] = useState([]);
   const [paired, setPaired] = useState(false);
 
   const handle = () => {
-    setData([
+    setSummary([
       { icon: faRunning, title: "Running", value: "5 km" },
       { icon: faBicycle, title: "Cycling", value: "8 km" },
       { icon: faWalking, title: "Walking", value: "3 km" },
@@ -73,6 +74,16 @@ const Dashboard = () => {
     setLoggedActivities([...loggedActivities, newActivity]);
     setShowModal(false); // Close the modal after logging the activity
   };
+
+  const summar = [
+    {
+      totalDistance: 35,
+      totalCalories: 1200,
+      averagePace: 5.5,
+      heartRate: 110,
+    },
+  ];
+
   return (
     <>
       <NavBar />
@@ -80,7 +91,7 @@ const Dashboard = () => {
         <div className="activity-cards">
           {/* Activity cards and log activity section */}
           <h2>Progress</h2>
-          {data.map((item) => (
+          {summary.map((item) => (
             <ActivityCard
               icon={item.icon}
               title={item.title}
@@ -107,7 +118,7 @@ const Dashboard = () => {
         )}
         <div className="activity-charts">
           {/* Graphs */}
-          <ActivityChart stepsData={stepsData} activityData={activityData} />
+          <ActivityChart stepsData={stepsData} />
           {paired ? (
             <div style={{ display: "flex" }}>
               <div className="icon-tick">
@@ -122,10 +133,10 @@ const Dashboard = () => {
         <div className="activity-summary">
           {/* Activity summary */}
           <ActivitySummary
-            totalDistance={totalDistance}
-            totalCalories={totalCalories}
-            averagePace={averagePace}
-            heartRate={heartRate}
+            totalDistance={summar[0].totalDistance}
+            totalCalories={summar[0].totalCalories}
+            averagePace={summar[0].averagePace}
+            heartRate={summar[0].heartRate}
           />
         </div>
       </div>

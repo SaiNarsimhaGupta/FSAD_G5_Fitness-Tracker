@@ -14,6 +14,52 @@ const NutritionTracking = () => {
   const [selectedFood, setSelectedFood] = useState("");
   const [loggedFoods, setLoggedFoods] = useState([]);
 
+  // const [food,setFood]=useState([]);
+  // useEffect(() => {
+  //   fetchNutrition("user123");
+  // }, []);
+
+  // const fetchNutrition = async (userId) => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8080/ftApiService/getUserDetails?userid=${userId}"
+  //     );
+  //     const data = await response.text();
+  //     setFood(data.nutritions);
+  //   } catch (error) {
+  //     console.error("Error fetching version:", error);
+  //   }
+  // };
+  // const foodList = food.map(nutrition => {
+  //   // Initialize macros
+  //   let carbs = 0;
+  //   let fat = 0;
+  //   let protein = 0;
+
+  //   // Calculate macronutrient values based on the macronutrient type
+  //   switch (nutrition.macronutrienttype) {
+  //     case "Protein":
+  //       protein = parseFloat(nutrition.calorieintake);
+  //       break;
+  //     case "Carbohydrate":
+  //       carbs = parseFloat(nutrition.calorieintake);
+  //       break;
+  //     case "Fat":
+  //       fat = parseFloat(nutrition.calorieintake);
+  //       break;
+  //     default:
+  //       // If the macronutrient type is not recognized, do nothing
+  //       break;
+  //   }
+
+  //   return {
+  //     name: nutrition.foodname,
+  //     carbs,
+  //     fat,
+  //     protein
+  //   };
+  // });
+
   const handleFoodSelect = (food) => {
     setSelectedFood(foodList.find((item) => item.name === food));
   };
@@ -33,6 +79,27 @@ const NutritionTracking = () => {
       ]);
       setSelectedFood("");
     }
+    console.log(selectedFood.name);
+    // const postdata = {
+    //   foodname: selectedFood.name,
+    //   calorieintake: selectedFood.protien,
+    // };
+    //   fetch('http://localhost:8080/ftApiService/logNutritions?userid=${userId}', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(postdata)
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    //   })
+    //   .catch(error => {
+    //     console.error('There was a problem with your fetch operation:', error);
+    //   });
   };
 
   const handleRemoveFood = (index) => {
