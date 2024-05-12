@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @SuppressWarnings("unused")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/ftApiService")
 public class ActivityController {
     @Autowired
