@@ -5,20 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class DataInitializerService {
 
-    @Autowired
+   //@Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostConstruct
+   //@PostConstruct
     public void populateDummyData() {
 
         String sqlDeleteUserDetails = "DELETE FROM UserDetails";
         String sqlDeleteActivity = "DELETE FROM Activity";
         String sqlDeleteNutrition = "DELETE FROM Nutrition";
 
-        String sqlUserDetails = "INSERT INTO UserDetails (UserId, Name, emailAddress, Phone) VALUES (?, ?, ?, ?)";
+        String sqlUserDetails = "INSERT INTO UserDetails (UserId, Name, emailAddress, Phone,Password) VALUES (?, ?, ?, ?,?)";
         String sqlActivity = "INSERT INTO Activity (UserId, ActivityId, Name, currentDuration, goalDuration, currentDistance, goalDistance, Calories) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         String sqlNutrition = "INSERT INTO Nutrition (NutritionId, UserId, FoodName, MealType, MacroNutrientType, CalorieIntake, CalorieGoal) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -26,6 +26,7 @@ public class DataInitializerService {
         String[] names = {"John Doe", "Jane Doe", "Alice Smith"};
         String[] emails = {"john.doe@example.com", "jane.doe@example.com", "alice.smith@example.com"};
         String[] phones = {"123-456-7890", "098-765-4321", "555-123-4567"};
+        String[] passwords = {"123", "456", "789"};
 
         String[] activityIds = {"act1", "act2", "act3"};
         String[] activityNames = {"Running", "Cycling", "Swimming"};
@@ -48,7 +49,7 @@ public class DataInitializerService {
 
         // Insert dummy user data
         for (int i = 0; i < userIds.length; i++) {
-            jdbcTemplate.update(sqlUserDetails, userIds[i], names[i], emails[i], phones[i]);
+            jdbcTemplate.update(sqlUserDetails, userIds[i], names[i], emails[i],phones[i] ,passwords[i]);
         }
 
         // Insert dummy activity data
