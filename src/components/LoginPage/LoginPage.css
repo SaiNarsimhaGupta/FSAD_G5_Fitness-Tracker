@@ -59,6 +59,10 @@ header {
   color: red;
   margin-bottom: 10px;
 }
+.success-message{
+  color: green;
+  margin-bottom: 10px;
+}
 
 button {
   width: 100%;
