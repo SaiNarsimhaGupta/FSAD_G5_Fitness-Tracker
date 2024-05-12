@@ -1,7 +1,9 @@
 // NutritionTracking.jsx
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./NutritionTracking.css";
 import NavBar from "../NavBar/NavBar";
+import AuthContext from "../../contexts/AuthContext";
+
 
 const foodList = [
   { name: "Fish", carbs: 0, fat: 5, protein: 20 },
@@ -13,52 +15,57 @@ const NutritionTracking = () => {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedFood, setSelectedFood] = useState("");
   const [loggedFoods, setLoggedFoods] = useState([]);
+  const { accessToken, userId } = useContext(AuthContext);
 
-  // const [food,setFood]=useState([]);
-  // useEffect(() => {
-  //   fetchNutrition("user123");
-  // }, []);
+  const [food,setFood]=useState([]);
+  useEffect(() => {
+    fetchNutrition(userId);
+  }, []);
 
-  // const fetchNutrition = async (userId) => {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:8080/ftApiService/getUserDetails?userid=${userId}"
-  //     );
-  //     const data = await response.text();
-  //     setFood(data.nutritions);
-  //   } catch (error) {
-  //     console.error("Error fetching version:", error);
-  //   }
-  // };
-  // const foodList = food.map(nutrition => {
-  //   // Initialize macros
-  //   let carbs = 0;
-  //   let fat = 0;
-  //   let protein = 0;
+  const fetchNutrition = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/ftApiService/getUserDetails?userid=${userId}`,{
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setFood(data.nutritions);
+    } catch (error) {
+      console.error("Error fetching version:", error);
+    }
+  };
+  const foodList = food.map(nutrition => {
+    // Initialize macros
+    let carbs = 0;
+    let fat = 0;
+    let protein = 0;
 
-  //   // Calculate macronutrient values based on the macronutrient type
-  //   switch (nutrition.macronutrienttype) {
-  //     case "Protein":
-  //       protein = parseFloat(nutrition.calorieintake);
-  //       break;
-  //     case "Carbohydrate":
-  //       carbs = parseFloat(nutrition.calorieintake);
-  //       break;
-  //     case "Fat":
-  //       fat = parseFloat(nutrition.calorieintake);
-  //       break;
-  //     default:
-  //       // If the macronutrient type is not recognized, do nothing
-  //       break;
-  //   }
+    // Calculate macronutrient values based on the macronutrient type
+    switch (nutrition.macronutrienttype) {
+      case "Protein":
+        protein = parseFloat(nutrition.calorieintake);
+        break;
+      case "Carbohydrate":
+        carbs = parseFloat(nutrition.calorieintake);
+        break;
+      case "Fat":
+        fat = parseFloat(nutrition.calorieintake);
+        break;
+      default:
+        // If the macronutrient type is not recognized, do nothing
+        break;
+    }
 
-  //   return {
-  //     name: nutrition.foodname,
-  //     carbs,
-  //     fat,
-  //     protein
-  //   };
-  // });
+    return {
+      name: nutrition.foodname,
+      carbs,
+      fat,
+      protein
+    };
+  });
 
   const handleFoodSelect = (food) => {
     setSelectedFood(foodList.find((item) => item.name === food));
@@ -80,26 +87,28 @@ const NutritionTracking = () => {
       setSelectedFood("");
     }
     console.log(selectedFood.name);
-    // const postdata = {
-    //   foodname: selectedFood.name,
-    //   calorieintake: selectedFood.protien,
-    // };
-    //   fetch('http://localhost:8080/ftApiService/logNutritions?userid=${userId}', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(postdata)
-    // })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    //   })
-    //   .catch(error => {
-    //     console.error('There was a problem with your fetch operation:', error);
-    //   });
+    const postdata = {
+      userid: userId,
+      foodname: selectedFood.name,
+      calorieintake: selectedFood.protien,
+    };
+      fetch('http://localhost:8080/ftApiService/logNutritions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(postdata)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+      });
   };
 
   const handleRemoveFood = (index) => {

@@ -1,14 +1,16 @@
 // GoalSetting.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import GoalCard from "../GoalCard/GoalCard";
 import "./GoalSetting.css"; // Import CSS for styling
 import NavBar from "../NavBar/NavBar";
+import AuthContext from "../../contexts/AuthContext";
 
 const GoalSetting = () => {
   const [goal, setGoal] = useState("");
   const [target, setTarget] = useState("");
   const [timeframe, setTimeframe] = useState("");
   const [goals, setGoals] = useState([]);
+  const { accessToken, userId } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,27 +19,28 @@ const GoalSetting = () => {
     setTarget("");
     setTimeframe("");
 
-    // const postdata = {
-    //   activityName: goal,
-    //   goaldistance:target,
-    //   goalduration: timeframe,
-    // };
-    //   fetch('http://localhost:8080/ftApiService/logActivityOrGoal?userid=${userId}', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(postdata)
-    // })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    //   })
-    //   .catch(error => {
-    //     console.error('There was a problem with your fetch operation:', error);
-    //   });
+    const postdata = {
+      activityName: goal,
+      goaldistance: target,
+      goalduration: timeframe,
+    };
+    fetch("http://localhost:8080/ftApiService/logActivityOrGoal", {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json",
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(postdata),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("There was a problem with your fetch operation:", error);
+      });
   };
 
   const handleRemoveGoal = (index) => {

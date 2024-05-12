@@ -1,12 +1,13 @@
 // ActivityLogForm.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 const ActivityLogForm = ({ onLogActivity }) => {
   const [activityType, setActivityType] = useState("");
   const [duration, setDuration] = useState("");
   const [distance, setDistance] = useState("");
   const [caloriesBurned, setCaloriesBurned] = useState("");
-
+  const { accessToken, userId } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newActivity = {
@@ -21,28 +22,30 @@ const ActivityLogForm = ({ onLogActivity }) => {
     setDistance("");
     setCaloriesBurned("");
 
-    // const postdata = {
-    //   activityName: activityType,
-    //   currentduration: duration,
-    //   currentdistance: distance,
-    //   calories: caloriesBurned,
-    // };
-    //   fetch('http://localhost:8080/ftApiService/logActivityOrGoal?userid=${userId}', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(postdata)
-    // })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    //   })
-    //   .catch(error => {
-    //     console.error('There was a problem with your fetch operation:', error);
-    //   });
+    const postdata = {
+      userid: userId,
+      activityName: activityType,
+      currentduration: duration,
+      currentdistance: distance,
+      calories: caloriesBurned,
+    };
+      fetch('http://localhost:8080/ftApiService/logActivityOrGoal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(postdata)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+      });
   };
 
   return (

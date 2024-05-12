@@ -1,5 +1,5 @@
 // Dashboard.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ActivityCard from "../ActivityCard/ActivityCard";
 import ActivityChart from "../ActivityChart/ActivityChart";
 import ActivitySummary from "../ActivitySummary/ActivitySummary"; // Import the ActivitySummary component
@@ -17,6 +17,7 @@ import Modal from "../Modal/Modal";
 import NavBar from "../NavBar/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { helper } from "../../utils/function";
+import AuthContext from "../../contexts/AuthContext";
 
 const Dashboard = () => {
   const [summary, setSummary] = useState([
@@ -26,22 +27,28 @@ const Dashboard = () => {
     { icon: faSwimmer, title: "Swimming", value: "1 km" },
   ]);
 
-  // useEffect(() => {
-  //   fetchSummary("user123");
-  // }, []);
+  const { accessToken, userId } = useContext(AuthContext);
+  useEffect(() => {
+    fetchSummary(userId, accessToken);
+  }, [userId, accessToken]);
 
-  // const fetchSummary = async (userId) => {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:8080/ftApiService/getUserDetails?userid=${userId}"
-  //     );
-  //     const data = await response.text();
-  //     const data1= await helper(data.activities)
-  //     setSummary(data1);
-  //   } catch (error) {
-  //     console.error("Error fetching version:", error);
-  //   }
-  // };
+  const fetchSummary = async (userId, accessToken) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/ftApiService/getActivitiesForUser?userid=${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      const data1 = await helper(data.activities);
+      setSummary(data1);
+    } catch (error) {
+      console.error("Error fetching summary:", error);
+    }
+  };
 
   // Sample data for line chart and bar chart
   const stepsData = [
