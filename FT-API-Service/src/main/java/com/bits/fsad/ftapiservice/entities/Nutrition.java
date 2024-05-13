@@ -1,38 +1,32 @@
 package com.bits.fsad.ftapiservice.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.sql.Date;
+
+@Data
 @Entity
-@Table(name = "NUTRITION")
+@Table(name = "nutrition")
 public class Nutrition {
+
     @Id
-    @Column(name = "NUTRITIONID", nullable = false)
-    private String nutritionid;
+    private Long nutritionId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "USERID", nullable = false)
-    private Userdetail userid;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
-    @Column(name = "FOODNAME")
-    private String foodname;
+    private String foodName;
 
-    @Column(name = "MEALTYPE")
-    private String mealtype;
+    private String mealType;
 
-    @Column(name = "MACRONUTRIENTTYPE")
-    private String macronutrienttype;
+    private String macroNutrientType;
 
-    @Column(name = "CALORIEINTAKE")
-    private String calorieintake;
+    private String calorieIntake;
 
-    @Column(name = "CALORIEGOAL")
-    private String caloriegoal;
+    private String calorieGoal;
+
+    private Date date;
 
 }

@@ -1,41 +1,34 @@
 package com.bits.fsad.ftapiservice.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.sql.Date;
+
+@Data
 @Entity
-@Table(name = "ACTIVITY")
+@Table(name = "activity")
 public class Activity {
+
     @Id
-    @Column(name = "ACTIVITYID", nullable = false)
-    private String activityid;
+    private long activityId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "USERID", nullable = false)
-    private Userdetail userid;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
-    @Column(name = "NAME", nullable = false)
-    private String name;
+    private String activityName;
 
-    @Column(name = "CURRENTDURATION")
-    private Integer currentduration;
+    private Integer currentDuration;
 
-    @Column(name = "GOALDURATION")
-    private Integer goalduration;
+    private Integer goalDuration;
 
-    @Column(name = "CURRENTDISTANCE")
-    private Integer currentdistance;
+    private Integer currentDistance;
 
-    @Column(name = "GOALDISTANCE")
-    private Integer goaldistance;
+    private Integer goalDistance;
 
-    @Column(name = "CALORIES")
     private Integer calories;
+
+    private Date date;
 
 }
