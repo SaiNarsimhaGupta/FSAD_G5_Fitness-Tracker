@@ -1,0 +1,30 @@
+/* CustomExerciseCard.css */
+.custom-exercise-card {
+    display: inline-flex; /* Use flexbox */
+    align-items: center; /* Center items vertically */
+    background-color: white;
+    padding: 8px 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .custom-exercise-card p {
+    margin: 0;
+    flex-grow: 1; /* Allow paragraph to grow to fill available space */
+  }
+  
+  .remove-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .remove-button:hover {
+    background-color: #c82333;
+  }
+  

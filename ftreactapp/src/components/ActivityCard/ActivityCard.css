@@ -1,0 +1,60 @@
+/* ActivityCard.css */
+.activity-card-summary {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-left: 0;
+  }
+  
+  .activity-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .icon {
+    font-size: 24px;
+    margin-right: 15px;
+  }
+  
+  .details h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color:#0E46A3
+  }
+  
+  .details p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* ActivityCard.css */
+.activity-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+  color: #3A98B9;
+}
+
+.social-icons {
+  width: 70px;
+  margin: auto;
+  padding: 10px 20px;
+  display: flex;
+  gap: 10px; /* Add spacing between icons */
+}
+
+.social-icons > svg {
+  cursor: pointer;
+}
+
+.social-icons > svg:focus {
+  outline: 2px solid blue; /* Add focus outline for accessibility */
+}
